@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For Thrisha 🌹</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at top, #ffe4e6 0, #fff7ed 40%, #eef2ff 100%);
+      overflow-x: hidden;
+      color: #111827;
+    }
+
+    /* Generic utilities */
+    .screen {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Floating petals + sparkles */
+    .petal, .sparkle {
+      position: fixed;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.45;
+    }
+
+    .petal {
+      font-size: 20px;
+      animation: fall linear infinite;
+    }
+
+    .sparkle {
+      font-size: 12px;
+      animation: twinkle 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) translateX(0) rotate(0deg); }
+      100% { transform: translateY(110vh) translateX(20px) rotate(360deg); }
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.2; transform: scale(0.9); }
+      100% { opacity: 0.8; transform: scale(1.1); }
+    }
+
+    /* ENTRY CARD */
+    .entry-card {
+      position: relative;
+      z-index: 5;
+      max-width: 420px;
+      width: 100%;
+      padding: 28px 24px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 30px 70px rgba(15, 23, 42, 0.25);
+      border: 1px solid rgba(248, 113, 113, 0.35);
+      backdrop-filter: blur(16px);
+      text-align: center;
+      animation: floatCard 2.2s ease-out forwards;
+      transform: translateY(8px);
+      opacity: 0;
+    }
+
+    @keyframes floatCard {
+      0% { transform: translateY(14px) scale(0.98); opacity: 0; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .entry-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(254, 226, 226, 0.9);
+      border: 1px solid rgba(248, 113, 113, 0.5);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9b1c38;
+      margin-bottom: 12px;
+    }
+
+    .entry-tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #ef4444;
+      box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.4);
+    }
+
+    .entry-title {
+      font-family: "Playfair Display", serif;
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    .entry-title span {
+      color: #e11d48;
+    }
+
+    .entry-rose {
+      font-size: 26px;
+      margin: 10px 0;
+      animation: floatRose 3s ease-in-out infinite;
+    }
+
+    @keyframes floatRose {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .entry-sub {
+      font-size: 13px;
+      color: #4b5563;
+      margin-bottom: 18px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: rgba(254, 242, 242, 0.9);
+      border: 1px solid #fecaca;
+      color: #7f1d1d;
+    }
+
+    .entry-btn {
+      margin-top: 6px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(120deg, #f97316, #ec4899, #ef4444);
+      color: #fef2f2;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 14px 35px rgba(248, 113, 113, 0.5);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .entry-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 18px 40px rgba(248, 113, 113, 0.65);
+    }
+
+    /* MAIN PAGE */
+    #mainPage {
+      align-items: center;
+      justify-content: center;
+    }
+
+    .main-shell {
+      position: relative;
+      z-index: 3;
+      max-width: 960px;
+      width: 100%;
+      padding: 18px;
+    }
+
+    .card {
+      width: 100%;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(254, 202, 202, 0.9);
+      box-shadow: 0 28px 70px rgba(15, 23, 42, 0.28);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr;
+      animation: slideUpMain 0.9s ease-out forwards;
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    @keyframes slideUpMain {
+      0% { opacity: 0; transform: translateY(18px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (min-width: 840px) {
+      .card {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+      }
+    }
+
+    .side-left {
+      padding: 22px 20px 22px 22px;
+      border-right: 1px solid rgba(248, 250, 252, 0.9);
+      background: radial-gradient(circle at top, #fee2e2, #fff7ed 45%, #fdf2f8 100%);
+      position: relative;
+    }
+
+    .side-right {
+      padding: 22px 22px 24px;
+      background: #fef9f9;
+    }
+
+    .corner-rose {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      font-size: 22px;
+    }
+
+    .headline {
+      margin-bottom: 10px;
+    }
+
+    .headline-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #9f1239;
+      margin-bottom: 4px;
+    }
+
+    .headline-main {
+      font-family: "Dancing Script", cursive;
+      font-size: clamp(26px, 4vw, 32px);
+      color: #9f1239;
+    }
+
+    .headline-main span {
+      color: #e11d48;
+    }
+
+    .headline-sub {
+      font-size: 13px;
+      color: #4b5563;
+      margin-top: 6px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .chip {
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: rgba(254, 242, 242, 0.9);
+      border: 1px solid #fecaca;
+      color: #7f1d1d;
+    }
+
+    .quote-box {
+      margin-top: 16px;
+      padding: 12px 13px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px dashed #fecaca;
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .quote-box strong {
+      color: #b91c1c;
+      font-weight: 500;
+    }
+
+    .section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+
+    .letter {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #374151;
+    }
+
+    .letter p {
+      margin-bottom: 10px;
+    }
+    /* IMAGE CARD CONTAINER */
+    .image-card-grid {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    align-items: stretch;
+    }
+
+    /* SINGLE CARD */
+    .image-card {
+    background: #fff5f7;
+    border: 1px solid #fecaca;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Hover effect */
+    .image-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+    }
+
+    /* IMAGE STYLING */
+    .image-card img {
+    width: 100%;
+    height: 220px;      /* Fixed height for clean layout */
+    object-fit: cover;  /* Crops it properly instead of stretching */
+    object-position: center;
+    display: block;
+    }
+
+    /* Caption below image */
+    .image-caption {
+    padding: 12px 14px;
+    background: #fffafa;
+    font-size: 13px;
+    text-align: center;
+    color: #6b7280;
+    font-style: italic;
+    }
+
+    /* Responsive for mobile */
+    @media (max-width: 600px) {
+    .image-card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .image-card img {
+        height: 190px;
+    }
+    }
+
+
+    .highlight {
+      margin: 14px 0;
+      padding: 11px 12px;
+      border-radius: 16px;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      font-size: 13px;
+      color: #92400e;
+      font-weight: 500;
+    }
+
+    .list-3 {
+      margin: 12px 0 6px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    @media (min-width: 640px) {
+      .list-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    .list-card {
+      background: #fef2f2;
+      border-radius: 14px;
+      padding: 10px 11px;
+      border: 1px solid #fecaca;
+      text-align: left;
+    }
+
+    .list-card-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #b91c1c;
+      margin-bottom: 4px;
+    }
+
+    .list-card-body {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .surprise-btn {
+      margin-top: 10px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      border: none;
+      background: #e11d48;
+      color: #fee2e2;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .surprise {
+      display: none;
+      margin-top: 9px;
+      padding: 10px 11px;
+      border-radius: 14px;
+      border: 1px dashed #f97373;
+      background: #fef2f2;
+      font-size: 13px;
+      color: #7f1d1d;
+    }
+
+    .closing {
+      margin-top: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #374151;
+    }
+
+    .signature {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #6b7280;
+      text-align: right;
+      font-style: italic;
+    }
+
+    /* Music button */
+    .music-btn {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 20;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.92);
+      color: #f9fafb;
+      font-size: 12px;
+      border: none;
+      cursor: pointer;
+    }
+
+    @media (max-width: 520px) {
+      .entry-card {
+        padding: 22px 18px;
+        border-radius: 22px;
+      }
+      .card {
+        border-radius: 24px;
+      }
+      .side-left, .side-right {
+        padding: 18px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Floating petals -->
+<div class="petal" style="left:10%; animation-duration:11s; animation-delay:0s;">🌸</div>
+<div class="petal" style="left:28%; animation-duration:9s; animation-delay:2s;">🌹</div>
+<div class="petal" style="left:52%; animation-duration:12s; animation-delay:1s;">🌸</div>
+<div class="petal" style="left:75%; animation-duration:10s; animation-delay:3s;">🌹</div>
+<div class="petal" style="left:90%; animation-duration:8s; animation-delay:1.5s;">🌸</div>
+
+<!-- Sparkles -->
+<div class="sparkle" style="top:12%; left:18%;">✨</div>
+<div class="sparkle" style="top:22%; left:80%;">✨</div>
+<div class="sparkle" style="top:70%; left:15%;">✨</div>
+<div class="sparkle" style="top:62%; left:72%;">✨</div>
+
+<!-- ENTRY SCREEN -->
+<section id="entryScreen" class="screen">
+  <div class="entry-card">
+    <div class="entry-tag">
+      <span class="entry-tag-dot"></span>
+      For: Thrisha • From: Your Idiot Friend
+    </div>
+    <h1 class="entry-title">Here’s your little <span>birthday gift</span> </h1>
+    <div class="entry-rose">🌹🌹</div>
+    <p class="entry-sub">
+      Not a WhatsApp status.  
+      Not a forward.  
+      Just something I made because <b>you actually matter</b>.
+    </p>
+    <div class="pill-row">
+      <div class="pill">soft-hearted</div>
+      <div class="pill">cute + dangerous combo</div>
+      <div class="pill">chaotic but pure</div>
+      <div class="pill">my comfort human</div>
+    </div>
+    <button class="entry-btn" onclick="openGift()">Open your memory gift 🎁</button>
+  </div>
+</section>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="golduu.mp3" type="audio/mpeg">
+</audio>
+<button class="music-btn" onclick="toggleMusic()">🎵 music</button>
+
+<!-- MAIN PAGE -->
+<section id="mainPage" class="screen hidden">
+  <div class="main-shell">
+    <div class="card">
+      <!-- LEFT SIDE -->
+      <div class="side-left">
+        <div class="corner-rose">🌹</div>
+        <div class="headline">
+          <div class="headline-label">Birthday • Memory Page</div>
+          <div class="headline-main">Happy Birthday, <span>Thrisha</span></div>
+          <div class="headline-sub">
+            from the friend who doesn’t say it often,<br>
+            but feels it more than you think.
+          </div>
+        </div>
+        <div class="chips">
+          <div class="chip">soft but strong</div>
+          <div class="chip">cute trouble</div>
+          <div class="chip">unfiltered talks</div>
+          <div class="chip">“are you okay?” checks</div>
+        </div>
+        <div class="quote-box">
+          <strong>Our story in one line:</strong><br>
+          Two people who started talking randomly and somehow turned it into
+          “I can’t imagine my life without this person now.”
+        </div>
+        <!-- IMAGE CARD SECTION -->
+        <div class="image-card-grid">
+        <div class="image-card">
+            <img src="photoo.jpg" alt="A memory">
+            <div class="image-caption">A bunch of roses, just for you 🌹</div>
+        </div>
+
+        </div>
+
+
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <div class="side-right">
+        <div class="section-title">A little letter instead of a long paragraph on WhatsApp</div>
+        <div class="letter">
+          <p>
+            Some people enter with a lot of noise.  
+            You didn’t. You just… appeared. Softly. And then stayed.
+          </p>
+
+          <p>
+            Our journey wasn’t some dramatic story. It was small chats, random teasing,
+            late replies, sudden deep talks, stupid inside jokes that no one else would
+            even understand — and somehow, all of that turned into something I genuinely rely on.
+          </p>
+
+          <p>
+            We’ve seen each other in different moods — tired, overthinking, irritated at life,
+            randomly happy for no reason, and those silent days where we still somehow knew
+            what the other was feeling without saying it.
+          </p>
+
+          <div class="highlight">
+            With you, even the messy days felt a little lighter.  
+            Not because life was perfect — but because I wasn’t facing it alone.
+          </div>
+
+          <p>
+            You’re soft when you care. Cute when you’re annoyed.  
+            And sometimes a little too hot for your own good when you’re just being you.  
+            But the best part is still your heart — the way you listen, the way you stay,
+            the way you just… exist in my life without making it complicated.
+          </p>
+
+          <div class="section-title" style="margin-top:12px;">Three things I’ll never forget about you</div>
+          <div class="list-3">
+            <div class="list-card">
+              <div class="list-card-title">01 • the way you stay</div>
+              <div class="list-card-body">
+                You don’t always say big words, but you show up.  
+                In your own soft, low-key way — and that’s enough.
+              </div>
+            </div>
+            <div class="list-card">
+              <div class="list-card-title">02 • our stupid jokes</div>
+              <div class="list-card-body">
+                The ones that only we understand.  
+                The ones that would make zero sense to anyone else — but reset my mood.
+              </div>
+            </div>
+            <div class="list-card">
+              <div class="list-card-title">03 • how safe it feels</div>
+              <div class="list-card-body">
+                Being myself. Saying anything. Or saying nothing.  
+                And still feeling like I’m understood.
+              </div>
+            </div>
+          </div>
+
+          <button class="surprise-btn" onclick="showSurprise()">Tap for one last thing 🤍</button>
+          <div class="surprise" id="surpriseBox">
+            If I had to re-live my life again and choose my people  
+            from the start — I’d still want a version of you in every timeline.
+          </div>
+
+          <div class="closing">
+            Happy Birthday, Thrisha.  
+            Stay soft. Stay rare. Stay a little dangerous.  
+            And please remember — you’re not “just another person” in my life, And   <br>Love you Golduuu !!
+          </div>
+
+          <div class="signature">
+            — your idiot, loyal friend<br>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const entryScreen = document.getElementById("entryScreen");
+  const mainPage = document.getElementById("mainPage");
+  const music = document.getElementById("bgMusic");
+  let musicPlaying = false;
+
+  function openGift() {
+    entryScreen.classList.add("hidden");
+    mainPage.classList.remove("hidden");
+    // optional: auto-play music if you want
+    // music.play(); musicPlaying = true;
+  }
+
+  function toggleMusic() {
+    if (!musicPlaying) {
+      music.play();
+      musicPlaying = true;
+    } else {
+      music.pause();
+      musicPlaying = false;
+    }
+  }
+
+  function showSurprise() {
+    const box = document.getElementById("surpriseBox");
+    box.style.display = "block";
+  }
+</script>
+</body>
+</html>
